@@ -1,0 +1,58 @@
+---
+title: "Assignment 3"
+author: "Jee Ong 47086998"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output:
+  html_document: default
+  pdf_document: default
+bibliography: referencelist.bib
+---
+
+## Exercise 1
+
+```{r load_data, echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggplot2)
+
+# load your data here
+```
+
+### Plot 1
+
+```{r plot1, echo=TRUE}
+
+# put your code here for plot 1, then do it again for plots 2-4 :)
+
+```
+
+
+
+## Exercise 2
+
+**Not required**, but you're welcome to put a link to your R package on GitHub here for completeness if your GitHub account is not private. For example, click [here](https://github.com/hadley/emo) to see the emoji package.
+
+
+## Exercise 3
+
+### Chi-squared Tests for independence
+
+This [link](https://rpruim.github.io/s341/S19/from-class/MathinRmd.html) is helpful to formatting maths in RMarkdown. You will see it includes Greek letters, including $\chi^2$. 
+
+Some questions you might like to consider here
+
+- what is the null and alternative hypothesis? $H_0=\text{hmmm what's this?}$ and $H_1=\text{hmmm..}$
+- what is the formula for the chi-squared test statistic?
+- how do you calculate the expected values?
+- to help explain the chi-squared test, work through the example provided in the assignment question and show your working. You can check your $\chi^2$ statistic in R using a package for chi-squared tests and get the p-value for your analysis. Do you reject or fail to reject the null hypothesis?
+- some packages in R that can do chi-squared tests:
+    - `stats` 
+    - `janitor` 
+    - to get the citation for these packages, in the R console run `citation("stats")` or `citation("janitor")`
+    
+Here is an example of how to include references in your assignment in RMarkdown - the `referencelist.bib` file can be downloaded from iLearn under week 9 material and this file has been included on line 8 of `A2_template.Rmd`. Here is a book by @boas2006mathematical and an article by @lustri2018nanoptera and the `mpcmp` package @mpcmp. These have nothing to do with chi-squared tests so don't reference these in your assignment.
+
+### Fisher’s Exact test
+
+### Testing if Fisher’s Exact test is conservative
+
+## References
