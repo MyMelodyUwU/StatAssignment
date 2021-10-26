@@ -11,17 +11,40 @@ bibliography: referencelist.bib
 ## Exercise 1
 
 ```{r load_data, echo=TRUE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(ggplot2)
+library("tidyverse")
+library("devtools")
+library("glue")
+library("dplyr")
+library("stringr")
+library("ggplot2")
+library("knitr")
+library("ggrepel")
+passwords <- read_csv("passwords.csv")
 
-# load your data here
+# Get the Data (Provided on github)
+
+# passwords <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-14/passwords.csv')
+
+# Or read in with tidytuesdayR package (https://github.com/thebioengineer/tidytuesdayR)
+# PLEASE NOTE TO USE 2020 DATA YOU NEED TO UPDATE tidytuesdayR from GitHub
+
+# Either ISO-8601 date or year/week works!
+
+# Install via 
+#devtools::install_github("thebioengineer/tidytuesdayR", force = TRUE)
+
+#tuesdata <- tidytuesdayR::tt_load('2020-01-14') 
+tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
+
+#passwords <- tuesdata$passwords
+
 ```
 
-### Plot 1
+### INIT
 
 ```{r plot1, echo=TRUE}
 
-# put your code here for plot 1, then do it again for plots 2-4 :)
+
 
 ```
 
