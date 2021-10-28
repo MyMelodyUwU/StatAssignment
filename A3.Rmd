@@ -1,16 +1,23 @@
 ---
-title: "Assignment 3"
-author: "Jee Ong 47086998"
+title: "STAT 1378: A Thomas Fung Appreciation Society"
+subtitle: "Assignment 3"
 date: "`r format(Sys.time(), '%d %B %Y')`"
-output:
-  html_document: default
-  pdf_document: default
-bibliography: referencelist.bib
+fontsize: 10pt
+classoption: "aspectratio=169"
+output: 
+  beamermq::macquarie:
+     keep_tex: yes
+     toc: no
+     incremental: true
+     # Change texmflocal to yes if you install the template files into your local tex installation.
+     texmflocal: no
+bibliography: references.bib
 ---
 
 ## Exercise 1
 
 ```{r load_data, echo=TRUE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, cache=TRUE)
 library("tidyverse")
 library("devtools")
 library("glue")
@@ -43,8 +50,11 @@ tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
 ### INIT
 
 ```{r plot1, echo=TRUE}
-
-
+  plot1 <- passwords %>%
+  ggplot(data = plot1) +
+  geom_line(mapping = aes(x = date, y = time)) +
+  facet_wrap(~plot1$strength, scales = "free") +
+  labs(title = "Plot #1: How the Three Lap (with no shortcut) develops overtime")
 
 ```
 

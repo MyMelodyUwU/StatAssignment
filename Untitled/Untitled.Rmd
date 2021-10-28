@@ -14,9 +14,40 @@ output:
 bibliography: references.bib
 ---
 
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, cache=TRUE)
+library("tidyverse")
+library("devtools")
+library("glue")
+library("dplyr")
+library("stringr")
+library("ggplot2")
+library("knitr")
+library("ggrepel")
+passwords <- read_csv("passwords.csv")
+
+# Get the Data (Provided on github)
+
+# passwords <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-01-14/passwords.csv')
+
+# Or read in with tidytuesdayR package (https://github.com/thebioengineer/tidytuesdayR)
+# PLEASE NOTE TO USE 2020 DATA YOU NEED TO UPDATE tidytuesdayR from GitHub
+
+# Either ISO-8601 date or year/week works!
+
+# Install via 
+#devtools::install_github("thebioengineer/tidytuesdayR", force = TRUE)
+
+#tuesdata <- tidytuesdayR::tt_load('2020-01-14') 
+tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
+
+#passwords <- tuesdata$passwords
+
 ```
+
+
 
 # Intro
 
@@ -38,15 +69,78 @@ Use `\alert` to \alert{highlight} some text
 
 ## Slide with R output
 
-```{r cars, echo = TRUE}
-summary(cars)
+```{r p1, echo = TRUE}
+  plot1 <- passwords %>%
+  filter(category == "animal")
+  ggplot(data = plot1) +
+  geom_line(mapping = aes(x = strength, y = offline_crack_sec)) +
+  facet_wrap(~plot1$password, scales = "free") +
+  labs(title = "Plot #1: How the Three Lap (with no shortcut) develops overtime")
+  
+  plot1
 ```
+
+```{r p1, echo = TRUE}
+  plot1 <- passwords %>%
+  filter(rank < 500)
+  ggplot(data = plot1) +
+  geom_line(mapping = aes(x = strength, y = offline_crack_sec)) +
+  facet_wrap(~plot1$category, scales = "free") +
+  labs(title = "Plot #1: The category with the most exploitable passwords")
+  
+  plot1
+```
+
 
 ## Slide with graphics
 
-```{r pressure}
-plot(pressure)
+```{r plot2, echo=TRUE, message=TRUE, fig.align='center'}
+plot2 <- passwords %>%
+    filter(time_unit == "years" && rank < 100) %>%
+    group_by(interaction(strength,offline_crack_sec)) %>%
+    # mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) %>%
+    # ggplot(aes(x = date, y = time, color = Race)) +
+    ggplot(aes(x = strength, y = offline_crack_sec)) +
+    geom_point() +
+    geom_line() +
+    labs(title = "Plot 2: A strength vs time crack chart", subtitle = "?", x = "Strength", y = "crack time")
+
+plot2
+
+# i want a histogram here
+# i want advice on what i should look for in the histogram
 ```
+
+```{r plot2, echo=TRUE, message=TRUE, fig.align='center'}
+plot2 <- passwords %>%
+    filter(rank < 100) %>%
+    group_by(interaction(strength,offline_crack_sec)) %>%
+    # mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) %>%
+    # ggplot(aes(x = date, y = time, color = Race)) +
+    ggplot(aes(x = strength, y = offline_crack_sec)) +
+    geom_point() +
+    geom_line() +
+    labs(title = "Plot 2: A strength vs time crack chart", subtitle = "?", x = "Strength", y = "crack time")
+
+plot2
+
+# i want a histogram here
+# i want advice on what i should look for in the histogram
+```
+
+```{r}
+  name <- names(passwords)
+  # Filter me?
+  fit0 <- lm(offline_crack_sec ~ value, data = passwords)
+  plot3 <- ggplot(passwords, aes(x = rank, y = strength)) + 
+  geom_point() + 
+  ggtitle(glue::glue("Scatterplot of {name[1]} vs {name[8]}")) + 
+  xlab(name[1]) + ylab(name[2])
+  
+  plot3
+```
+
+
 
 ## Slide with mathematics
 
