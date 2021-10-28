@@ -80,7 +80,7 @@ Use `\alert` to \alert{highlight} some text
   plot1
 ```
 
-```{r p1, echo = TRUE}
+```{r p1d, echo = TRUE}
   plot1 <- passwords %>%
   filter(rank < 500)
   ggplot(data = plot1) +
@@ -111,7 +111,7 @@ plot2
 # i want advice on what i should look for in the histogram
 ```
 
-```{r plot2, echo=TRUE, message=TRUE, fig.align='center'}
+```{r plot2d, echo=TRUE, message=TRUE, fig.align='center'}
 plot2 <- passwords %>%
     filter(rank < 100) %>%
     group_by(interaction(strength,offline_crack_sec)) %>%
@@ -131,15 +131,17 @@ plot2
 ```{r}
   name <- names(passwords)
   # Filter me?
-  fit0 <- lm(offline_crack_sec ~ value, data = passwords)
-  plot3 <- ggplot(passwords, aes(x = rank, y = strength)) + 
+  # fit0 <- lm(offline_crack_sec ~ value, data = passwords)
+  passPlot3 <- passwords %>% 
+  filter(strength < 20)
+  plot3 <- ggplot(passPlot3, aes(x = rank, y = strength)) + 
   geom_point() + 
   ggtitle(glue::glue("Scatterplot of {name[1]} vs {name[8]}")) + 
   xlab(name[1]) + ylab(name[2])
   
   plot3
 ```
-
+# no need to fit model to data. Visualisation 
 
 
 ## Slide with mathematics

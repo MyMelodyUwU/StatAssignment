@@ -282,6 +282,42 @@ Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
 ## 10   163 rabbit   animal    3.72 days                0.00321      163        6
 ## # ... with 19 more rows, and 1 more variable: font_size <dbl>
 \end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  plot1 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(rank }\SpecialCharTok{\textless{}} \DecValTok{500}\NormalTok{)}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ plot1) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
+  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{plot1}\SpecialCharTok{$}\NormalTok{category, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot \#1: The category with the most exploitable passwords"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Untitled_files/figure-beamer/p1d-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{  plot1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 499 x 9
+##     rank password category    value time_unit offline_crack_s~ rank_alt strength
+##    <dbl> <chr>    <chr>       <dbl> <chr>                <dbl>    <dbl>    <dbl>
+##  1     1 password password-r~  6.91 years          2.17               1        8
+##  2     2 123456   simple-alp~ 18.5  minutes        0.0000111          2        4
+##  3     3 12345678 simple-alp~  1.29 days           0.00111            3        4
+##  4     4 1234     simple-alp~ 11.1  seconds        0.000000111        4        4
+##  5     5 qwerty   simple-alp~  3.72 days           0.00321            5        8
+##  6     6 12345    simple-alp~  1.85 minutes        0.00000111         6        4
+##  7     7 dragon   animal       3.72 days           0.00321            7        8
+##  8     8 baseball sport        6.91 years          2.17               8        4
+##  9     9 football sport        6.91 years          2.17               9        7
+## 10    10 letmein  password-r~  3.19 months         0.0835            10        8
+## # ... with 489 more rows, and 1 more variable: font_size <dbl>
+\end{verbatim}
 \end{frame}
 
 \begin{frame}[fragile]{Slide with graphics}
@@ -289,14 +325,14 @@ Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{plot2 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{filter}\NormalTok{(time\_unit }\SpecialCharTok{==} \StringTok{"years"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(time\_unit }\SpecialCharTok{==} \StringTok{"years"} \SpecialCharTok{\&\&}\NormalTok{ rank }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
     \FunctionTok{group\_by}\NormalTok{(}\FunctionTok{interaction}\NormalTok{(strength,offline\_crack\_sec)) }\SpecialCharTok{\%\textgreater{}\%}
     \CommentTok{\# mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) \%\textgreater{}\%}
     \CommentTok{\# ggplot(aes(x = date, y = time, color = Race)) +}
     \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
     \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
     \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"A strength vs time crack chart"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"?"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Strength"}\NormalTok{, }\AttributeTok{y =} \StringTok{"crack time"}\NormalTok{)}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot 2: A strength vs time crack chart"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"?"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Strength"}\NormalTok{, }\AttributeTok{y =} \StringTok{"crack time"}\NormalTok{)}
 
 \NormalTok{plot2}
 \end{Highlighting}
@@ -310,6 +346,33 @@ Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
 \CommentTok{\# i want advice on what i should look for in the histogram}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plot2 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{filter}\NormalTok{(rank }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{group\_by}\NormalTok{(}\FunctionTok{interaction}\NormalTok{(strength,offline\_crack\_sec)) }\SpecialCharTok{\%\textgreater{}\%}
+    \CommentTok{\# mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) \%\textgreater{}\%}
+    \CommentTok{\# ggplot(aes(x = date, y = time, color = Race)) +}
+    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot 2: A strength vs time crack chart"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"?"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Strength"}\NormalTok{, }\AttributeTok{y =} \StringTok{"crack time"}\NormalTok{)}
+
+\NormalTok{plot2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{Untitled_files/figure-beamer/plot2d-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# i want a histogram here}
+\CommentTok{\# i want advice on what i should look for in the histogram}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Untitled_files/figure-beamer/unnamed-chunk-1-1.pdf}
 \end{frame}
 
 \begin{frame}{Slide with mathematics}
