@@ -51,7 +51,7 @@ tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
 
 # Intro
 
-## Slide with bullets
+## Bananas in Pajamas
 
 - Bullet 1
 - Bullet 2
