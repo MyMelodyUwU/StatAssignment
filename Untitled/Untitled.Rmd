@@ -1,6 +1,6 @@
 ---
-title: "STAT 1378: A Thomas Fung Appreciation Society"
-subtitle: "Assignment 3"
+title: "STAT 1378"
+subtitle: "Assignment 3: Investigation of top 500 passwords. "
 date: "`r format(Sys.time(), '%d %B %Y')`"
 fontsize: 10pt
 classoption: "aspectratio=169"
@@ -9,15 +9,11 @@ output:
      keep_tex: yes
      toc: no
      incremental: true
-     # Change texmflocal to yes if you install the template files into your local tex installation.
      texmflocal: no
 bibliography: references.bib
 ---
 
-
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE, cache=TRUE)
 library("tidyverse")
 library("devtools")
 library("glue")
@@ -44,164 +40,131 @@ passwords <- read_csv("passwords.csv")
 #tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
 
 #passwords <- tuesdata$passwords
-
+passwordsFiltered <- passwords[!is.na(passwords[,1]),]
 
 ```
 
+## Main Investigation
 
-
-# Intro
-
-## Bananas in Pajamas
-
-- Investigation of x. 
-- We will go through y
-- To create conclusin of z
+>- Investigation of top 500 passwords. 
+>- 2 main questions:
+>- Which Category has the weakest passwords?
+>- Does having a stronger password affect how long it takes to crack it?
+>- Finals Conclusions. 
+>- Other Recommendations. 
+>- References
 
 ## My Data:
 
-- Variables
+Variables:
 
-  1. 
+>1. \alert{Rank} (Which is the most COMMON password)
+>2. \alert{Password} (The password itself).
+>3. \alert{Value} (Time to crack by online guessing)
+>4. \alert{TimeUnit} (The metric of time for a password brute force.)
+>5. \alert{OfflineCrackSec} (The amount of seconds for a password to be cracked)
+>6. \alert{Strength} (Strength of password according to security.org)
+>7. \alert{Font size}
 
-Use `\alert` to \alert{highlight} some text
+## Hypothesis:
+>1. Most exploitable category are names.
+>2. Name will have the shortest time to be cracked.
+>3. There IS a relationship between rank and strength
+>4. There is a correlation between strength and value 
 
-### Some enumeration
+# Datasets 
 
-1. The first item
-1. Stuff
-1. Nonsense
+## Most Exploitable Category. 
 
-# Using R
-
-## Slide with R output
-
-```{r p1, echo = FALSE}
-  plot1 <- passwords %>%
-  filter(category == "animal")
-  ggplot(data = plot1) +
-  geom_line(mapping = aes(x = strength, y = offline_crack_sec)) +
-  facet_wrap(~plot1$password, scales = "free") +
-  labs(title = "Plot #1: How the Three Lap (with no shortcut) develops overtime")
-  
-  plot1
+```{r, echo = FALSE, fig.align='center', out.width="80%"}
+name <- names(passwordsFiltered)
+plot4Data <- filter(passwordsFiltered)
+  ggplot(plot4Data) +
+  geom_col(aes(x = rank, y = category)) +
+  ggtitle(glue::glue("Bar Chart of Most Exploitable category"))
 ```
 
-## Hello 
+## Cateogry of the strongest and weakest passwords. 
 
-```{r p1d, echo = FALSE}
-  plot1 <- passwords %>%
+```{r plot2, echo=FALSE, fig.align='center', out.width="80%"}
+p2 <- ggplot(data = passwordsFiltered) +
+  geom_bar(aes(x = strength, y = category),
+  stat = "identity", position = "dodge") +
+ggtitle(glue::glue("Plot 2: A {name[8]} vs {name[3]} Stacked Histogram"))
+
+p2
+```
+## Category of the strength vs time to crack in s
+
+```{r plot2a, echo=FALSE, fig.align='center', out.width="80%", warning=FALSE, message=FALSE}
+passwords$logtime <- log(passwords$offline_crack_sec)
+passwords %>%
+  filter(category == "name") %>%
+  ggplot(aes(x = logtime, y = strength)) +
+  geom_point() +
+  geom_smooth() +
+  ggtitle(glue::glue("Plot 3: A logtime vs {name[8]} Test"))
+
+
+```
+
+
+## Rank vs Strength ScatterPlot
+
+```{r plot3d, echo=FALSE, fig.align='center', message = FALSE, out.width="80%"}
+plot4 <- passwordsFiltered %>%
+    filter(category == "name") %>%
+    ggplot(aes(x = rank, y = strength)) +
+    geom_point() +
+    geom_smooth() +
+    ggtitle(glue::glue("Plot 4: A {name[1]} vs {name[8]} Test"))
+
+plot4
+```
+
+# Correlation Test
+
+```{r correlation, echo = TRUE}
+
+correlation <- cor(x = passwordsFiltered$rank, y = passwordsFiltered$strength)
+
+correlation
+```
+
+
+## Value vs Strength Scatter plot. 
+
+```{r scatterAttempt, echo=FALSE, fig.align='center', out.width="80%", message = FALSE}
+  plot5Draft <- passwordsFiltered %>% 
   filter(rank < 500)
-  ggplot(data = plot1) +
-  geom_line(mapping = aes(x = strength, y = offline_crack_sec)) +
-  facet_wrap(~plot1$category, scales = "free") +
-  labs(title = "Plot #1: The category with the most exploitable passwords")
-  
-  plot1
-```
-
-
-## bananan
-
-```{r plot2, echo=FALSE, fig.align='center'}
-plot2 <- passwords %>%
-    filter(time_unit == "years" && rank < 100) %>%
-    group_by(interaction(strength,offline_crack_sec)) %>%
-    # mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) %>%
-    # ggplot(aes(x = date, y = time, color = Race)) +
-    ggplot(aes(x = strength, y = offline_crack_sec)) +
-    geom_point() +
-    geom_line() +
-    labs(title = "Plot 2: A strength vs time crack chart", subtitle = "?", x = "Strength", y = "crack time")
-
-plot2
-
-# i want a histogram here
-# i want advice on what i should look for in the histogram
-```
-
-## Chicken
-
-```{r plot2d, echo=FALSE, fig.align='center'}
-plot2 <- passwords %>%
-    filter(rank < 100) %>%
-    group_by(interaction(strength,offline_crack_sec)) %>%
-    # mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) %>%
-    # ggplot(aes(x = date, y = time, color = Race)) +
-    ggplot(aes(x = strength, y = offline_crack_sec)) +
-    geom_point() +
-    geom_line() +
-    labs(title = "Plot 2: A strength vs time crack chart", subtitle = "?", x = "Strength", y = "crack time")
-
-plot2
-
-# i want a histogram here
-# i want advice on what i should look for in the histogram
-```
-
-## plop
-
-```{r scatterAttempt, echo=FALSE}
-  name <- names(passwords)
-  # Filter me?
-  # fit0 <- lm(offline_crack_sec ~ value, data = passwords)
-  passPlot3 <- passwords %>% 
-  filter(strength < 20)
-  plot3 <- ggplot(passPlot3, aes(x = rank, y = strength)) + 
+  plot5 <- ggplot(plot5Draft, aes(x = value, y = strength)) + 
   geom_point() + 
-  ggtitle(glue::glue("Scatterplot of {name[1]} vs {name[8]}")) + 
-  xlab(name[1]) + ylab(name[2])
+  geom_smooth() +
+  ggtitle(glue::glue("Scatterplot of {name[4]} vs {name[8]}")) + 
+  xlab(name[4]) + 
+  ylab(name[8])
   
-  plot3
-```
-# no need to fit model to data. Visualisation 
-
-
-## Slide with mathematics
-
-Suppose $X_1, X_2, \ldots, X_n$ are independent and identitically distributed random variables with common cumulative distribution function $F_X$ with support on $\mathbb{R}$. The empirical cumulative distribution function is defined with,
-\[
-  F_n(x) = \frac{1}{n}\sum_{i = 1}^n I_{\left( -\infty, x\right]}(X_i)
-\]
-where $I_A(x)$ denotes the indicator function for the set $A$. The following theorem provides uniform covergence for $F_n$
-
-
-:::{.block}
-### Glivenko-Cantelli Theorem
-If $X_i$ are i.i.d. with common cdf $F$ then,
-\[
-  \left\| F_n - F \right\| = \sup_{x \in \mathbb{R}} |F_n(x) - F(x)| \stackrel{n \to \infty}{\longrightarrow} 0\quad \text{almost surely.}
-\]
-:::
-
-* See @vanderVaart.Wellner:96 for more information on Empirical processes.
-
----
-
-A slide with no header if you need more space.
-
-# RMarkdown Examples
-
-## R Figure
-
-```{r mtcarsboxplot, echo = TRUE}
-plot(mpg ~ cyl, data = mtcars)
+  plot5
 ```
 
-## R Table
+# Conclusions
 
-A simple `knitr::kable` example:
+>- Name was the most common password category. 
+>- The time to crack some passwords took longer, regardless of what category. 
+>- There IS NO linear regression between rank and strength. 
+>- There IS a linear regression between strength and Time to crack. 
+>- There is NO linear regression between value and strength. 
 
-\small
+# Other Reccomendations:
 
-```{r kableEx, echo=TRUE}
-knitr::kable(head(mtcars),
-       caption="First few observations of the mtcars dataset")
-```
+## Password Manager: 
 
-## Resources
-
-* See the [RMarkdown repository](https://github.com/rstudio/rmarkdown) for more on RMarkdown
-* Also the 
+>- Minimises chances of password being guessed with RNG password generation. 
+>- Bitwarden changes the strength of the password.
+>- Through our observation, this will make more unique passwords that would not be categorized. As we realise, that passwords categorised as a name I.e. Fluttershy is more common than a RNG one. 
 
 ## References
+
+@grilo2021towards
+@suo2005graphical
+@tidyTuesday

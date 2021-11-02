@@ -52,7 +52,7 @@
 
 
 \hypersetup{
-      pdftitle={STAT 1378: A Thomas Fung Appreciation Society},
+      pdftitle={STAT 1378},
             pdfborder={0 0 0},
     breaklinks=true}
 %\urlstyle{same}  % Use monospace font for urls
@@ -101,12 +101,6 @@
   \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
   \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 
-  \usepackage{longtable,booktabs}
-  \usepackage{caption}
-  % These lines are needed to make table captions work with longtable:
-  \makeatletter
-  \def\fnum@table{\tablename~\thetable}
-  \makeatother
 
 
 % From {rticles}
@@ -137,15 +131,6 @@
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 
-  \usepackage{graphicx,grffile}
-  \makeatletter
-  \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-  \def\maxheight{\ifdim\Gin@nat@height>\textheight0.8\textheight\else\Gin@nat@height\fi}
-  \makeatother
-  % Scale images if necessary, so that they will not overflow the page
-  % margins by default, and it is still possible to overwrite the defaults
-  % using explicit options in \includegraphics[width, height, ...]{}
-  \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 
 % Prevent slide breaks in the middle of a paragraph:
 \widowpenalties 1 10000
@@ -190,16 +175,16 @@
 \fi
 %%
 
-  \title[]{STAT 1378: A Thomas Fung Appreciation Society}
+  \title[]{STAT 1378}
 
-  \subtitle{Assignment 3}
+  \subtitle{Assignment 3: Investigation of top 500 passwords.}
 
 
 
 \date[
-      30 October 2021
+      02 November 2021
   ]{
-      30 October 2021
+      02 November 2021
         }
 
 \begin{document}
@@ -211,202 +196,170 @@
 
 
 
-\hypertarget{intro}{%
-\section{Intro}\label{intro}}
-
-\begin{frame}[fragile]{Bananas in Pajamas}
-\protect\hypertarget{bananas-in-pajamas}{}
-\begin{itemize}[<+->]
+\begin{frame}{Main Investigation}
+\protect\hypertarget{main-investigation}{}
+\begin{itemize}
 \tightlist
 \item
-  Bullet 1
+  Investigation of top 500 passwords.
 \item
-  Bullet 2
+  2 main questions:
 \item
-  Bullet 3
+  Which Category has the weakest passwords?
+\item
+  Does having a stronger password affect how long it takes to crack it?
+\item
+  Finals Conclusions.
+\item
+  Other Recommendations.
+\item
+  References
 \end{itemize}
+\end{frame}
 
-Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
+\begin{frame}{My Data:}
+\protect\hypertarget{my-data}{}
+Variables:
 
-\begin{block}{Some enumeration}
-\protect\hypertarget{some-enumeration}{}
-\begin{enumerate}[<+->]
+\begin{enumerate}
 \tightlist
 \item
-  The first item
+  \alert{Rank} (Which is the most COMMON password)
 \item
-  Stuff
+  \alert{Password} (The password itself).
 \item
-  Nonsense
+  \alert{Value} (Time to crack by online guessing)
+\item
+  \alert{TimeUnit} (The metric of time for a password brute force.)
+\item
+  \alert{OfflineCrackSec} (The amount of seconds for a password to be
+  cracked)
+\item
+  \alert{Strength} (Strength of password according to security.org)
+\item
+  \alert{Font size}
 \end{enumerate}
-\end{block}
 \end{frame}
 
-\hypertarget{using-r}{%
-\section{Using R}\label{using-r}}
-
-\begin{frame}[fragile]{Slide with R output}
-\protect\hypertarget{slide-with-r-output}{}
-\includegraphics{Untitled_files/figure-beamer/p1-1.pdf}
-
-\begin{verbatim}
-## # A tibble: 29 x 9
-##     rank password category value time_unit offline_crack_sec rank_alt strength
-##    <dbl> <chr>    <chr>    <dbl> <chr>                 <dbl>    <dbl>    <dbl>
-##  1     7 dragon   animal    3.72 days                0.00321        7        8
-##  2    11 monkey   animal    3.72 days                0.00321       11        8
-##  3    90 bigdog   animal    3.72 days                0.00321       90        7
-##  4    98 falcon   animal    3.72 days                0.00321       98        8
-##  5   105 phoenix  animal    3.19 months              0.0835       105        9
-##  6   108 tigers   animal    3.72 days                0.00321      108        8
-##  7   131 chicken  animal    3.19 months              0.0835       131        8
-##  8   144 bulldog  animal    3.19 months              0.0835       144        7
-##  9   160 spider   animal    3.72 days                0.00321      160        8
-## 10   163 rabbit   animal    3.72 days                0.00321      163        6
-## # ... with 19 more rows, and 1 more variable: font_size <dbl>
-\end{verbatim}
-\end{frame}
-
-\begin{frame}[fragile]{Hello}
-\protect\hypertarget{hello}{}
-\includegraphics{Untitled_files/figure-beamer/p1d-1.pdf}
-
-\begin{verbatim}
-## # A tibble: 499 x 9
-##     rank password category    value time_unit offline_crack_s~ rank_alt strength
-##    <dbl> <chr>    <chr>       <dbl> <chr>                <dbl>    <dbl>    <dbl>
-##  1     1 password password-r~  6.91 years          2.17               1        8
-##  2     2 123456   simple-alp~ 18.5  minutes        0.0000111          2        4
-##  3     3 12345678 simple-alp~  1.29 days           0.00111            3        4
-##  4     4 1234     simple-alp~ 11.1  seconds        0.000000111        4        4
-##  5     5 qwerty   simple-alp~  3.72 days           0.00321            5        8
-##  6     6 12345    simple-alp~  1.85 minutes        0.00000111         6        4
-##  7     7 dragon   animal       3.72 days           0.00321            7        8
-##  8     8 baseball sport        6.91 years          2.17               8        4
-##  9     9 football sport        6.91 years          2.17               9        7
-## 10    10 letmein  password-r~  3.19 months         0.0835            10        8
-## # ... with 489 more rows, and 1 more variable: font_size <dbl>
-\end{verbatim}
-\end{frame}
-
-\begin{frame}{bananan}
-\protect\hypertarget{bananan}{}
-\begin{center}\includegraphics{Untitled_files/figure-beamer/plot2-1} \end{center}
-\end{frame}
-
-\begin{frame}{Chicken}
-\protect\hypertarget{chicken}{}
-\begin{center}\includegraphics{Untitled_files/figure-beamer/plot2d-1} \end{center}
-\end{frame}
-
-\begin{frame}{plop}
-\protect\hypertarget{plop}{}
-\includegraphics{Untitled_files/figure-beamer/scatterAttempt-1.pdf} \#
-no need to fit model to data. Visualisation
-\end{frame}
-
-\begin{frame}{Slide with mathematics}
-\protect\hypertarget{slide-with-mathematics}{}
-Suppose \(X_1, X_2, \ldots, X_n\) are independent and identitically
-distributed random variables with common cumulative distribution
-function \(F_X\) with support on \(\mathbb{R}\). The empirical
-cumulative distribution function is defined with, \[
-  F_n(x) = \frac{1}{n}\sum_{i = 1}^n I_{\left( -\infty, x\right]}(X_i)
-\] where \(I_A(x)\) denotes the indicator function for the set \(A\).
-The following theorem provides uniform covergence for \(F_n\)
-
-\begin{block}{Glivenko-Cantelli Theorem}
-\protect\hypertarget{glivenko-cantelli-theorem}{}
-If \(X_i\) are i.i.d. with common cdf \(F\) then, \[
-  \left\| F_n - F \right\| = \sup_{x \in \mathbb{R}} |F_n(x) - F(x)| \stackrel{n \to \infty}{\longrightarrow} 0\quad \text{almost surely.}
-\]
-\end{block}
-
-\begin{itemize}[<+->]
+\begin{frame}{Hypothesis:}
+\protect\hypertarget{hypothesis}{}
+\begin{enumerate}
 \tightlist
 \item
-  See Vaart and Wellner (1996) for more information on Empirical
-  processes.
+  Most exploitable category are names.
+\item
+  Name will have the shortest time to be cracked.
+\item
+  There IS a relationship between rank and strength
+\item
+  There is a correlation between strength and value
+\end{enumerate}
+\end{frame}
+
+\hypertarget{datasets}{%
+\section{Datasets}\label{datasets}}
+
+\begin{frame}{Most Exploitable Category.}
+\protect\hypertarget{most-exploitable-category.}{}
+\begin{center}\includegraphics[width=0.8\linewidth]{Untitled_files/figure-beamer/unnamed-chunk-1-1} \end{center}
+\end{frame}
+
+\begin{frame}{Cateogry of the strongest and weakest passwords.}
+\protect\hypertarget{cateogry-of-the-strongest-and-weakest-passwords.}{}
+\begin{center}\includegraphics[width=0.8\linewidth]{Untitled_files/figure-beamer/plot2-1} \end{center}
+\end{frame}
+
+\begin{frame}{Category of the strength vs time to crack in s}
+\protect\hypertarget{category-of-the-strength-vs-time-to-crack-in-s}{}
+\begin{center}\includegraphics[width=0.8\linewidth]{Untitled_files/figure-beamer/plot2a-1} \end{center}
+\end{frame}
+
+\begin{frame}{Rank vs Strength ScatterPlot}
+\protect\hypertarget{rank-vs-strength-scatterplot}{}
+\begin{center}\includegraphics[width=0.8\linewidth]{Untitled_files/figure-beamer/plot3d-1} \end{center}
+\end{frame}
+
+\hypertarget{correlation-test}{%
+\section{Correlation Test}\label{correlation-test}}
+
+\begin{frame}[fragile]{Correlation Test}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{correlation }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(}\AttributeTok{x =}\NormalTok{ passwordsFiltered}\SpecialCharTok{$}\NormalTok{rank, }\AttributeTok{y =}\NormalTok{ passwordsFiltered}\SpecialCharTok{$}\NormalTok{strength)}
+
+\NormalTok{correlation}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.0466191
+\end{verbatim}
+\end{frame}
+
+\begin{frame}{Value vs Strength Scatter plot.}
+\protect\hypertarget{value-vs-strength-scatter-plot.}{}
+\begin{center}\includegraphics[width=0.8\linewidth]{Untitled_files/figure-beamer/scatterAttempt-1} \end{center}
+\end{frame}
+
+\hypertarget{conclusions}{%
+\section{Conclusions}\label{conclusions}}
+
+\begin{frame}{Conclusions}
+\begin{itemize}
+\tightlist
+\item
+  Name was the most common password category.
+\item
+  The time to crack some passwords took longer, regardless of what
+  category.
+\item
+  There IS NO linear regression between rank and strength.
+\item
+  There IS a linear regression between strength and Time to crack.
+\item
+  There is NO linear regression between value and strength.
 \end{itemize}
 \end{frame}
 
-\begin{frame}
-A slide with no header if you need more space.
-\end{frame}
+\hypertarget{other-reccomendations}{%
+\section{Other Reccomendations:}\label{other-reccomendations}}
 
-\hypertarget{rmarkdown-examples}{%
-\section{RMarkdown Examples}\label{rmarkdown-examples}}
-
-\begin{frame}[fragile]{R Figure}
-\protect\hypertarget{r-figure}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{plot}\NormalTok{(mpg }\SpecialCharTok{\textasciitilde{}}\NormalTok{ cyl, }\AttributeTok{data =}\NormalTok{ mtcars)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Untitled_files/figure-beamer/mtcarsboxplot-1.pdf}
-\end{frame}
-
-\begin{frame}[fragile]{R Table}
-\protect\hypertarget{r-table}{}
-A simple \texttt{knitr::kable} example:
-
-\small
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(mtcars),}
-       \AttributeTok{caption=}\StringTok{"First few observations of the mtcars dataset"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{longtable}[]{@{}lrrrrrrrrrrr@{}}
-\caption{First few observations of the mtcars dataset}\tabularnewline
-\toprule
-& mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb \\
-\midrule
-\endfirsthead
-\toprule
-& mpg & cyl & disp & hp & drat & wt & qsec & vs & am & gear & carb \\
-\midrule
-\endhead
-Mazda RX4 & 21.0 & 6 & 160 & 110 & 3.90 & 2.620 & 16.46 & 0 & 1 & 4 &
-4 \\
-Mazda RX4 Wag & 21.0 & 6 & 160 & 110 & 3.90 & 2.875 & 17.02 & 0 & 1 & 4
-& 4 \\
-Datsun 710 & 22.8 & 4 & 108 & 93 & 3.85 & 2.320 & 18.61 & 1 & 1 & 4 &
-1 \\
-Hornet 4 Drive & 21.4 & 6 & 258 & 110 & 3.08 & 3.215 & 19.44 & 1 & 0 & 3
-& 1 \\
-Hornet Sportabout & 18.7 & 8 & 360 & 175 & 3.15 & 3.440 & 17.02 & 0 & 0
-& 3 & 2 \\
-Valiant & 18.1 & 6 & 225 & 105 & 2.76 & 3.460 & 20.22 & 1 & 0 & 3 & 1 \\
-\bottomrule
-\end{longtable}
-\end{frame}
-
-\begin{frame}{Resources}
-\protect\hypertarget{resources}{}
-\begin{itemize}[<+->]
+\begin{frame}{Password Manager:}
+\protect\hypertarget{password-manager}{}
+\begin{itemize}
 \tightlist
 \item
-  See the \href{https://github.com/rstudio/rmarkdown}{RMarkdown
-  repository} for more on RMarkdown
+  Minimises chances of password being guessed with RNG password
+  generation.
 \item
-  Also the
+  Bitwarden changes the strength of the password.
+\item
+  Through our observation, this will make more unique passwords that
+  would not be categorized. As we realise, that passwords categorised as
+  a name I.e. Fluttershy is more common than a RNG one.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{References}
 \protect\hypertarget{references}{}
+Grilo, Ferreira, and Almeida (2021) Suo, Zhu, and Owen (2005) Hughes
+(2020)
+
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
-\leavevmode\hypertarget{ref-vanderVaart.Wellner:96}{}%
-Vaart, Aad W. van der, and Jon A. Wellner. 1996. \emph{Weak Convergence
-and Empirical Processes}. Springer Series in Statistics.
-Springer-Verlag, New York.
-\url{https://doi.org/10.1007/978-1-4757-2545-2}.
+\leavevmode\hypertarget{ref-grilo2021towards}{}%
+Grilo, Miguel, João F Ferreira, and José Bacelar Almeida. 2021.
+{``Towards Formal Verification of Password Generation Algorithms Used in
+Password Managers.''} \emph{arXiv Preprint arXiv:2106.03626}.
+
+\leavevmode\hypertarget{ref-tidyTuesday}{}%
+Hughes, Ellis. 2020. \emph{tidytuesdayR: Access the Weekly 'TidyTuesday'
+Project Dataset}. \url{https://CRAN.R-project.org/package=tidytuesdayR}.
+
+\leavevmode\hypertarget{ref-suo2005graphical}{}%
+Suo, Xiaoyuan, Ying Zhu, and G Scott Owen. 2005. {``Graphical Passwords:
+A Survey.''} In \emph{21st Annual Computer Security Applications
+Conference (ACSAC'05)}, 10--pp. IEEE.
 
 \end{CSLReferences}
 \end{frame}
