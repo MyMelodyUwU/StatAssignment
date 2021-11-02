@@ -41,9 +41,10 @@ passwords <- read_csv("passwords.csv")
 #devtools::install_github("thebioengineer/tidytuesdayR", force = TRUE)
 
 #tuesdata <- tidytuesdayR::tt_load('2020-01-14') 
-tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
+#tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
 
 #passwords <- tuesdata$passwords
+
 
 ```
 
@@ -53,9 +54,15 @@ tuesdata <- tidytuesdayR::tt_load(2020, week = 3)
 
 ## Bananas in Pajamas
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+- Investigation of x. 
+- We will go through y
+- To create conclusin of z
+
+## My Data:
+
+- Variables
+
+  1. 
 
 Use `\alert` to \alert{highlight} some text
 
@@ -69,7 +76,7 @@ Use `\alert` to \alert{highlight} some text
 
 ## Slide with R output
 
-```{r p1, echo = TRUE}
+```{r p1, echo = FALSE}
   plot1 <- passwords %>%
   filter(category == "animal")
   ggplot(data = plot1) +
@@ -80,7 +87,9 @@ Use `\alert` to \alert{highlight} some text
   plot1
 ```
 
-```{r p1d, echo = TRUE}
+## Hello 
+
+```{r p1d, echo = FALSE}
   plot1 <- passwords %>%
   filter(rank < 500)
   ggplot(data = plot1) +
@@ -92,9 +101,9 @@ Use `\alert` to \alert{highlight} some text
 ```
 
 
-## Slide with graphics
+## bananan
 
-```{r plot2, echo=TRUE, message=TRUE, fig.align='center'}
+```{r plot2, echo=FALSE, fig.align='center'}
 plot2 <- passwords %>%
     filter(time_unit == "years" && rank < 100) %>%
     group_by(interaction(strength,offline_crack_sec)) %>%
@@ -111,7 +120,9 @@ plot2
 # i want advice on what i should look for in the histogram
 ```
 
-```{r plot2d, echo=TRUE, message=TRUE, fig.align='center'}
+## Chicken
+
+```{r plot2d, echo=FALSE, fig.align='center'}
 plot2 <- passwords %>%
     filter(rank < 100) %>%
     group_by(interaction(strength,offline_crack_sec)) %>%
@@ -128,7 +139,9 @@ plot2
 # i want advice on what i should look for in the histogram
 ```
 
-```{r}
+## plop
+
+```{r scatterAttempt, echo=FALSE}
   name <- names(passwords)
   # Filter me?
   # fit0 <- lm(offline_crack_sec ~ value, data = passwords)

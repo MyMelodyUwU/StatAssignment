@@ -1,0 +1,86 @@
+Intro:
+
+Our security is very crucial in this day and age, and one example of an exploit can be seen through passwords.
+
+Within this investigation, we will discover an exploitable category of data to find different influences on password
+security.
+
+---
+
+Within my given data,
+There are 7 variables in the data I've chosen.
+
+Rank, Password, Value, TimeUnit, Crack Time In Sec and Strength
+
+---
+
+Onto my Hypothesis:
+
+1. My hypothesis is that most exploitable category are names.
+2. When I transform my data, i will find a linear trend. 
+4. There is a linear correlation between Rank and strength.
+5. Within the most common category, name there is a linear correlation between strength and value.
+
+---
+
+With the data presented:
+
+In order for me to find all the exploitable categories, I am using a bar chart. A bar chart is helpful as i can tally the categorial data against the rank. Which we can confirm that Name as a category is the most exploitable I.e. Thomas and Fluttershy.
+
+For this one, in order for me to also present my data, I also used two plots
+to show the time for a computer to brute force the password. 
+
+the first histogram is the strength vs cateogry histogram, which shows which categories have the strongest passwords.
+In this case, it seems that nerdy-pop is the strongest passwords against the computer when being brute forced. 
+
+Afterwards, I have created a logarithmic transformation with my time against the strength. we can observe that
+there is a linear trend here. 
+
+therefore, we can speculatte that there is a regression here. 
+
+then, we will compare the strength against the time it takes to crack the password, which we will 
+
+
+
+This will show how many seconds it takes for a password to be cracked, 
+which the smaller the bar, the faster a password within that category to be cracked.
+
+Next, I demonstrate a linear regression in a scatter plot to see if the rank of the password
+ and the strength are correlated. Within my analysis with a scatter plot, 
+I realise that there is no correlation when we view the data.
+Since there is no correlation when we view the graph, we can use a Pearsons exact test to double check.
+
+This is my analysis. From the observed script, the correlation is near to 0, therefore there is no correlation.
+
+Lastly, I demonstrate a linear regression in a Value vs Strength plot 
+to see if the rank of the Strength and the Value are correlated.
+ Within my analysis with a scatter plot, I realise that there is no correlation when we view the data.
+
+And, that is my analysis.
+
+---
+
+Conclusion:
+
+I was predominatly wrong in my hypothesis.
+
+i was correct that the name was the most common password that could be exploited. 
+
+In the histogram and the plot, I came to suprise that nerdy-pop was the strongest password category and 
+that there is a 
+linear trend between the time it takes to crack against the strength of the password. 
+
+In a rank vs strength scatter plot, I've come to notice that there is no linear correlation.
+
+In the value vs strength plot there is also no linear correlation.
+
+With that in mind, there are some other tips as well:
+
+---
+
+Have a password manager.
+Don't use something common.
+Through our observation, this will make more unique passwords that would not be categorized.
+As we realise, that passwords categorised as a name I.e. Fluttershy is more common than a RNG one.
+
+Thank you.

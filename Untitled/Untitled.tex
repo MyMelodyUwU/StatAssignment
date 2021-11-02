@@ -197,9 +197,9 @@
 
 
 \date[
-      28 October 2021
+      30 October 2021
   ]{
-      28 October 2021
+      30 October 2021
         }
 
 \begin{document}
@@ -214,8 +214,8 @@
 \hypertarget{intro}{%
 \section{Intro}\label{intro}}
 
-\begin{frame}[fragile]{Slide with bullets}
-\protect\hypertarget{slide-with-bullets}{}
+\begin{frame}[fragile]{Bananas in Pajamas}
+\protect\hypertarget{bananas-in-pajamas}{}
 \begin{itemize}[<+->]
 \tightlist
 \item
@@ -247,24 +247,7 @@ Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
 
 \begin{frame}[fragile]{Slide with R output}
 \protect\hypertarget{slide-with-r-output}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{  plot1 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{filter}\NormalTok{(category }\SpecialCharTok{==} \StringTok{"animal"}\NormalTok{)}
-  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ plot1) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{plot1}\SpecialCharTok{$}\NormalTok{password, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot \#1: How the Three Lap (with no shortcut) develops overtime"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \includegraphics{Untitled_files/figure-beamer/p1-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{  plot1}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 29 x 9
@@ -282,25 +265,11 @@ Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
 ## 10   163 rabbit   animal    3.72 days                0.00321      163        6
 ## # ... with 19 more rows, and 1 more variable: font_size <dbl>
 \end{verbatim}
+\end{frame}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{  plot1 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{filter}\NormalTok{(rank }\SpecialCharTok{\textless{}} \DecValTok{500}\NormalTok{)}
-  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ plot1) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{(}\SpecialCharTok{\textasciitilde{}}\NormalTok{plot1}\SpecialCharTok{$}\NormalTok{category, }\AttributeTok{scales =} \StringTok{"free"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot \#1: The category with the most exploitable passwords"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{frame}[fragile]{Hello}
+\protect\hypertarget{hello}{}
 \includegraphics{Untitled_files/figure-beamer/p1d-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{  plot1}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ## # A tibble: 499 x 9
@@ -320,59 +289,20 @@ Use \texttt{\textbackslash{}alert} to \alert{highlight} some text
 \end{verbatim}
 \end{frame}
 
-\begin{frame}[fragile]{Slide with graphics}
-\protect\hypertarget{slide-with-graphics}{}
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plot2 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{filter}\NormalTok{(time\_unit }\SpecialCharTok{==} \StringTok{"years"} \SpecialCharTok{\&\&}\NormalTok{ rank }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{group\_by}\NormalTok{(}\FunctionTok{interaction}\NormalTok{(strength,offline\_crack\_sec)) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) \%\textgreater{}\%}
-    \CommentTok{\# ggplot(aes(x = date, y = time, color = Race)) +}
-    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
-    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-    \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot 2: A strength vs time crack chart"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"?"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Strength"}\NormalTok{, }\AttributeTok{y =} \StringTok{"crack time"}\NormalTok{)}
-
-\NormalTok{plot2}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{frame}{bananan}
+\protect\hypertarget{bananan}{}
 \begin{center}\includegraphics{Untitled_files/figure-beamer/plot2-1} \end{center}
+\end{frame}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# i want a histogram here}
-\CommentTok{\# i want advice on what i should look for in the histogram}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{plot2 }\OtherTok{\textless{}{-}}\NormalTok{ passwords }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{filter}\NormalTok{(rank }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-    \FunctionTok{group\_by}\NormalTok{(}\FunctionTok{interaction}\NormalTok{(strength,offline\_crack\_sec)) }\SpecialCharTok{\%\textgreater{}\%}
-    \CommentTok{\# mutate(Banana = paste(type,ifelse(shortcut == "Yes", "With Shourtcut","Without Shortcut"))) \%\textgreater{}\%}
-    \CommentTok{\# ggplot(aes(x = date, y = time, color = Race)) +}
-    \FunctionTok{ggplot}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ strength, }\AttributeTok{y =}\NormalTok{ offline\_crack\_sec)) }\SpecialCharTok{+}
-    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
-    \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Plot 2: A strength vs time crack chart"}\NormalTok{, }\AttributeTok{subtitle =} \StringTok{"?"}\NormalTok{, }\AttributeTok{x =} \StringTok{"Strength"}\NormalTok{, }\AttributeTok{y =} \StringTok{"crack time"}\NormalTok{)}
-
-\NormalTok{plot2}
-\end{Highlighting}
-\end{Shaded}
-
+\begin{frame}{Chicken}
+\protect\hypertarget{chicken}{}
 \begin{center}\includegraphics{Untitled_files/figure-beamer/plot2d-1} \end{center}
+\end{frame}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# i want a histogram here}
-\CommentTok{\# i want advice on what i should look for in the histogram}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Untitled_files/figure-beamer/unnamed-chunk-1-1.pdf}
+\begin{frame}{plop}
+\protect\hypertarget{plop}{}
+\includegraphics{Untitled_files/figure-beamer/scatterAttempt-1.pdf} \#
+no need to fit model to data. Visualisation
 \end{frame}
 
 \begin{frame}{Slide with mathematics}
